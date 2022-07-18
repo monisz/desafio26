@@ -1,0 +1,25 @@
+<div class="container p-4 my-5 bg-light" id="listaProductos2">
+    <h1 style="color:blue">Vista de Productos</h1><br>
+    {{#if products}}
+    <table class="table table-dark">
+        <thead>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Foto</th>
+        </thead>
+        {{#each products}}
+        <tbody>
+            <tr>
+                <td>{{code}}</td>
+                <td>{{title}}</td>
+                <td>{{price}}</td>
+                <td><img src="{{thumbnail}}" height="50rem"></td>
+            </tr>
+        </tbody>
+        {{/each}}
+    </table>
+    {{else}}
+    <h3 style="background-color:aquamarine">No se encontraron productos</h3><br>
+    {{/if}}
+</div>

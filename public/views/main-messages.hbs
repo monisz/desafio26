@@ -1,0 +1,19 @@
+<div class="container p-3 my-4 bg-light">
+  <h2 style="color:blue">Centro de mensajes</h2>
+  <h3 style="color:blue">(Compresión: <strong id="percent">`${perCompression}`</strong>%)</h3>
+  <form onsubmit="return sendMessage()">
+    <div class="mb-3 mt-3">
+      <input type="email" class="form-control" id="email" placeholder="Ingrese su email" required/><br/>
+      <input type="name" class="form-control" id="name" placeholder="Ingrese su nombre" required/><br/>
+      <input type="lastName" class="form-control" id="lastName" placeholder="Ingrese su apellido" required/><br/>
+      <input type="age" class="form-control" id="age" placeholder="Ingrese su edad" required/><br/>
+      <input type="alias" class="form-control" id="alias" placeholder="Ingrese su alias" required/><br/>
+      <input type="avatar" class="form-control" id="avatar" placeholder="Ingrese su avatar (foto, logo)" required/>
+    </div>
+    <div id="messages"></div>
+    <div class="mb-3 mt-3">
+      <input type="text" class="form-control" id="text" placeholder="Ingresá un mensaje"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+  </form>
+</div>

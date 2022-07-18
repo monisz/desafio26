@@ -1,0 +1,18 @@
+<div class="container p-3 my-4 bg-light">
+  <h2 style="color:blue">Login de Usuario</h2>
+  <form action="/login" method="POST" id="login" >
+    <div class="mb-3 mt-3">
+      <label for="email" class="form-label">Ingrese su email</label>
+      <input type="text" class="form-control" id="email" placeholder="Ingrese su email" name="username" required/><br/>
+    </div>
+    <div class="mb-3 mt-3">
+      <label for="password" class="form-label">Ingrese su contraseña</label>
+      <input type="text" class="form-control" id="password" placeholder="Ingrese su contraseña" name="password" required/><br/>
+    </div>
+    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+  </form>
+  <br/>
+  <form action="/register" method="POST" id="register" >
+    <button type="submit" class="btn btn-primary">Ir a Register</button>
+  </form>
+</div>

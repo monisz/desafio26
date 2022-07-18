@@ -1,0 +1,23 @@
+<div class="container p-3 my-4 bg-light" >
+    <h2 style="color:blue">Vista de Productos Test</h2><br>
+    {{#if mocks}}
+    <table class="table table-dark">
+        <thead>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Foto</th>
+        </thead>
+        {{#each mocks}}
+        <tbody>
+            <tr>
+                <td>{{title}}</td>
+                <td>{{price}}</td>
+                <td><img src="{{thumbnail}}" height="50rem"></td>
+            </tr>
+        </tbody>
+        {{/each}}
+    </table>
+    {{else}}
+    <h3 style="background-color:aquamarine">No se encontraron productos</h3><br>
+    {{/if}}
+</div>
