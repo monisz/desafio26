@@ -12,7 +12,8 @@ const isAdmin = (req, res, next) => {
 router.get('/', (req, res) => {
     const getProducts = (async () => {
         const products = await tableProducts.getAll();
-        res.render('main-products', {products});
+        const username = req.session.username;
+        res.render('main-products', {products, username});
     }) ();
 });
 

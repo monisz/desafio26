@@ -60,35 +60,45 @@ app.get('/register', (req, res) => {
     res.render('register');
 });
 
-app.post('/register', passport.authenticate('register', {failureRedirect: '/login', failureMessage: true}), (req, res) => {
+app.post('/register', passport.authenticate('register', {failureRedirect: '/failregister', failureMessage: true}), (req, res) => {
     console.log("en post register")
     const registerSuccess = 'Registrado exitosamente. Ir a Login para ingresar'
     res.render('register', {registerSuccess});
 });
 
-app.get('/login', (req, res) => {
-    res.render('login');
+app.get('/failregister', (req, res) => {
+    res.render('failregister')
 });
 
-app.post('/login', passport.authenticate('login', {failureRedirect: '/register', failureMessage: true}), (req, res) => {
+app.get('/login', (req, res) => {
+    if (!req.session.username) 
+        res.render('login');
+    else {
+        const username = req.session.username;
+        res.render('main-products',  {username});
+    }
+});
+
+app.post('/login', passport.authenticate('login', {failureRedirect: '/faillogin', failureMessage: true}), (req, res) => {
     console.log("en post login")
     const { username, password } = req.body;
     req.session.username = username;
     res.render('main-products',  {username});
 });
 
-//Chequea si ya está logueado
-/* app.use('/', (req, res, next) => { */
-/*     if (!req.session.userName) { */
-/*         res.render('login'); */
-/*     } else next(); */
-/* }); */
+app.get('/faillogin', (req, res) => {
+    res.render('faillogin')
+});
 
-//Lo pasé acá para que el chequeo de logueado afecte también a estas rutas
-app.use('/', apiRoutes);
+const isLogin = (req, res, next) => {
+    if (!req.session.username) { 
+        res.render('login');
+    } else next();
+};
 
+app.use('/', isLogin, apiRoutes);
 
-app.post('/logout', async (req, res) => {
+app.post('/logout', isLogin, async (req, res) => {
     const username = req.session.username;
     req.session.destroy((err) => {
         console.log(err);
@@ -97,7 +107,7 @@ app.post('/logout', async (req, res) => {
 });
 
 //Ruta para test con Faker
-app.get('/api/productos-test', async (req, res) => {
+app.get('/api/productos-test', isLogin, async (req, res) => {
     const mocks = await tableProducts.generateMock();
     console.log(mocks)
     res.render('main-faker', {mocks})
