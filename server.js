@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const { engine } = require('express-handlebars');
 const { Server: HttpServer } = require('http');
@@ -5,7 +6,7 @@ const { Server: SocketServer } = require('socket.io');
 const session = require('express-session');
 /* const cookieParser = require('cookie-parser'); */
 const MongoStore = require('connect-mongo');
-const { mongoAtlasConnection } = require('./mongoAtlasConnection');
+const { MONGO_ATLAS_CONNECTION } = process.env;
 const passport = require('./passport');
 
 const apiRoutes = require('./src/routes')
@@ -24,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
     store: MongoStore.create({
-        mongoUrl: mongoAtlasConnection,
+        mongoUrl: MONGO_ATLAS_CONNECTION,
         dbName: 'ecommerce',
         //Según la docu, si la cookie tiene seteado el tiempo, usa ese
         ttl: 10 * 60,
